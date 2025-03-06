@@ -69,6 +69,11 @@
       width: 225px;
       margin-right: 20px;
     }
+
+    .logo-mobile {
+      display: none;
+    }
+
     /* Botão de menu hamburguer */
     .hamburger {
       background: none;
@@ -320,6 +325,10 @@
     /* Ajusta a barra de navegação para dispositivos menores */
     @media (max-width: 768px) {
 
+      .nav-menu li .logo {
+          display: none;
+      }
+
       section {
         padding: 196px 0;
       }
@@ -522,6 +531,42 @@
         justify-content: center;
       }
     }
+
+    @media (max-width: 768px) {
+      /* Ajusta a barra de navegação para exibir os itens em linha */
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+      }
+      /* Remove o posicionamento absoluto do botão hamburger para que ele fique em fluxo normal */
+      .hamburger {
+        display: block;
+        position: static;
+        font-size: 24px;
+        margin-right: 20px;
+      }
+      /* Ajuste o logo-mobile se necessário */
+      .logo-mobile {
+        width: 124px;
+        margin: 0;
+        display: block;
+      }
+
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: auto;
+      background: #333 url(statics/img/footer-bg-line-shape.png) no-repeat right center;
+      background-size: auto;
+      color: #fff;
+    }
+
+  }
+
   </style>
   <!-- Google reCAPTCHA -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -542,6 +587,9 @@
       </li>
     </ul>
     <button id="hamburger" class="hamburger"><i class="fas fa-bars"></i></button>
+    <div>
+      <img src="statics/img/tecstorm-logo.png" alt="Logo" class="logo-mobile">
+    </div>
     <!-- Botão Dark Mode para desktop -->
     <button class="dark-mode-toggle" id="darkModeToggleDesktop">
       <i class="fas fa-moon"></i>
