@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tecstorm Tecnologia e Informática</title>
+  <!-- Ícones via FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Estilos customizados -->
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #333;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    /* Barra de navegação fixa */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .nav-menu {
+      display: flex;
+      align-items: center; /* Garante o alinhamento vertical dos itens */
+      list-style: none;
+    }
+    .nav-menu li {
+      margin: 0 15px;
+    }
+    .nav-menu li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .nav-menu li a:hover {
+      color: #007BFF;
+    }
+    /* Botão de Dark Mode */
+    .dark-mode-toggle {
+      background: #007BFF;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Estilização para a logo do menu */
+    .nav-menu li .logo {
+      width: 50px;
+      margin-right: 20px;
+    }
+    /* Botão de menu hamburguer */
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      display: none; /* Esconde o botão por padrão */
+    }
+    /* Alteração para dividir o header em duas colunas alinhadas */
+    header#home {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      height: 100vh;
+      padding: 20px;
+      gap: 40px;
+      background: url('statics/img/bg-line-shape.png') no-repeat left bottom, linear-gradient(135deg, #1f1f1f, #2c2c2c);
+      background-size: auto, cover;
+      color: #fff;
+    }
+    header#home .section-info {
+      flex: 1;
+      text-align: left; /* Alinha o texto à esquerda */
+      animation: fadeIn 2s ease-in;
+      margin-left: 50px;
+    }
+    header#home .section-info h1 {
+      font-size: 3rem; /* Tamanho aumentado */
+      line-height: 1.2; /* Reduz o espaçamento entre as linhas, inclusive na quebra */
+    }
+    header#home .section-image {
+      flex: 1;
+      text-align: left;
+      position: relative;
+    }
+    header#home .section-image img {
+      position: absolute;
+      left: 50%; /* Ajuste conforme necessário */
+      bottom: -400px;
+      transform: translateX(-50%);
+      width: 90%; /* Ajuste conforme necessário */
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      clip-path: polygon(6% 0%, 100% 0%, 94% 100%, 0% 100%);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Container principal */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .container-full {
+      width: 100%;
+    }
+
+    /* Seções */
+    section {
+      padding: 96px 0;
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+    }
+    /* Serviços – utilizando Grid */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .service-item {
+      display: flex;
+      background: #f8f8f8;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s;
+      border: 1px solid #ddd; /* Borda cinza clara */
+    }
+    .service-item img {
+      margin-right: 20px;
+    }
+
+    .service-item:hover {
+      transform: translateY(-5px);
+    }
+    /* Estilização do card (service-item) para a imagem acima do título */
+    .service-item img {
+      display: block;
+      margin-bottom: 10px;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      text-align: left;
+    }
+    /* Formulário de Contato */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    form input, form select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    form button {
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      background: #007BFF;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    form button:hover {
+      background: #0056b3;
+    }
+    /* Footer */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50vh; /* Metade da tela */
+      background: #333 url('statics/img/footer-bg-line-shape.png') no-repeat right center;
+      background-size: auto;
+      color: #fff;
+    }
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      padding: 20px;
+    }
+    .footer-col {
+      flex: 1;
+      text-align: left; /* Alinha o conteúdo à esquerda */
+      margin-left: 20px;
+    }
+    .footer-col img {
+      max-width: 100px;
+      margin-bottom: 10px;
+    }
+    .footer-col h3 {
+      margin-bottom: 10px;
+    }
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-col ul li {
+      margin-bottom: 5px;
+    }
+    .footer-col ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+    /* Botão de Scroll para o Topo */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #007BFF;
+      color: #fff;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+    }
+    /* Dark Mode */
+    body.dark {
+      background: #121212;
+      color: #e0e0e0;
+    }
+    body.dark header {
+      background: linear-gradient(135deg, #000, #333);
+    }
+    body.dark nav {
+      background: #1f1f1f;
+    }
+    body.dark .nav-menu li a {
+      color: #e0e0e0;
+    }
+    body.dark .service-item {
+      background: #1f1f1f;
+    }
+    body.dark footer {
+      background: #1a1a1a;
+    }
+    /* Adiciona fundo SVG na seção Contato */
+    .contato-bkg {
+      /* background: url('statics/img/bkg-contato.svg') no-repeat center; */
+      background-size: cover;
+      padding: 60px 0;
+      background-color: #f7f7f9;
+    }
+    /* Estilização do Formulário de Contato */
+    #contactForm {
+      background: #fff;
+      padding: 24px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 4px; /* Opcional: para cantos arredondados */
+    }
+    /* Seção de Serviços ocupa a tela inteira e possui background */
+    .servicos-bkg {
+      /* height: 100vh; */
+      background: url('statics/img/price-right.png') no-repeat right center;
+      background-size: 80vh; /* Ajuste conforme necessário */
+      position: relative;
+      padding: 3rem;
+      margin-bottom: 120px;
+    }
+    /* Botão 'Entre em Contato' */
+    .contact-btn {
+      display: inline-block;
+      background: #007BFF;
+      color: #fff;
+      padding: 12px 24px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+    .contact-btn:hover {
+      background: #0056b3;
+    }
+
+    /* Estilos Gerais - Mobile First */
+
+    /* Ajusta a barra de navegação para dispositivos menores */
+    @media (max-width: 768px) {
+
+      section {
+        padding: 196px 0;
+      }
+      nav {
+        position: relative;
+      }
+      /* Oculta o menu por padrão */
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        width: 100%;
+        position: absolute;
+        top: 60px; /* altura da barra de navegação */
+        left: 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1100;
+      }
+      /* Exibe o menu quando aberto */
+      .nav-menu.open {
+        display: flex;
+        animation: slideDown 0.3s ease-out;
+      }
+      /* Botão hamburguer */
+      .hamburger {
+        display: block;
+        background: transparent;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        position: absolute;
+        right: 70px; /* Ajuste para não conflitar com o dark mode */
+        top: 10px;
+        z-index: 1200;
+      }
+      /* Se preferir esconder o menu original também, remova a exibição default dos itens extra da nav */
+      nav ul li {
+        margin: 5px 0;
+      }
+      /* Header - empilha as seções para melhor visualização em telas pequenas */
+      header#home {
+        height: 705px; /* Define a altura do header no mobile */
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 20px 10px;
+      }
+      header#home .section-info {
+        margin-left: 0;
+      }
+      header#home .section-image {
+        position: relative;
+      }
+      header#home .section-image img {
+        position: static;
+        transform: none;
+        width: 95%; /* Ocupa quase toda a largura da página */
+        margin: 0 auto;
+        clip-path: polygon(6% 0%, 100% 0%, 94% 100%, 0% 100%);
+      }
+      
+      /* Seção de Serviços - 1 coluna no grid */
+      .services {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+        gap: 16px;
+      }
+      
+      /* Ajusta tamanhos de texto se necessário */
+      section h2 {
+        font-size: 2rem;
+      }
+
+      .service-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .service-item img {
+        width: 64px;
+        height: 64px;
+        margin: 0 0 10px 0;
+      }
+
+      .servicos-bkg {
+      /* height: 100vh; */
+        background: url('statics/img/price-right.png') no-repeat right center;
+        background-size: 80vh; /* Ajuste conforme necessário */
+        position: relative;
+        padding: 3rem;
+        margin-bottom: 0px;
+      }
+
+      .footer-container {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          max-width: 1200px;
+          padding: 20px;
+      }
+      .footer-col {
+          flex: 1;
+          text-align: center;
+          margin: 10px 0;
+
+      }
+    }
+
+    /* Tablet - telas médias */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      header#home {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+      }
+      header#home .section-info {
+        margin-left: 0;
+      }
+      header#home .section-image img {
+        width: 70%;
+      }
+      .services {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 0 20px;
+      }
+      
+      section h2 {
+        font-size: 2.3rem;
+      }
+    }
+
+    /* Desktop - telas maiores */
+    /* Para desktop, os estilos atuais costumam funcionar bem, mas é possível ajustar pequenos detalhes se necessário */
+    @media (min-width: 1025px) {
+      header#home {
+        flex-direction: row;
+        text-align: left;
+        gap: 40px;
+        padding: 20px;
+      }
+      header#home .section-info {
+        margin-left: 50px;
+      }
+      header#home .section-image img {
+        position: absolute;
+        left: 50%;
+        bottom: -400px;
+        transform: translateX(-50%);
+        width: 90%;
+      }
+      .services {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding: 0;
+      }
+      
+      section h2 {
+        font-size: 2.5rem;
+      }
+    }
+    /* Animação de slide down */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Botão de Dark Mode para desktop */
+    #darkModeToggleDesktop {
+      display: block;
+    }
+
+    /* Em mobile, oculta o botão externo e exibe o item interno */
+    @media (max-width: 768px) {
+      #darkModeToggleDesktop {
+        display: none;
+      }
+      .mobile-dark {
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+      }
+      /* Opcional: ajuste o estilo do botão dentro do menu */
+      .mobile-dark .dark-mode-toggle {
+        background: #007BFF;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  </style>
+  <!-- Google reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+  <!-- Barra de Navegação -->
+  <nav>
+    <ul class="nav-menu">
+      <li><img src="https://via.placeholder.com/50" alt="Logo" class="logo"></li>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <!-- Botão Dark Mode para mobile -->
+      <li class="mobile-dark" style="display: none;">
+        <button class="dark-mode-toggle" id="darkModeToggleMobile">
+          <i class="fas fa-moon"></i>
+        </button>
+      </li>
+    </ul>
+    <button id="hamburger" class="hamburger"><i class="fas fa-bars"></i></button>
+    <!-- Botão Dark Mode para desktop -->
+    <button class="dark-mode-toggle" id="darkModeToggleDesktop">
+      <i class="fas fa-moon"></i>
+    </button>
+  </nav>
+
+  <!-- Banner / Apresentação -->
+  <header id="home">
+    <div class="section-info">
+      <h1>Tecstorm Tecnologia<br> e Informática</h1>
+      <br>
+      <p>Impulsionando sua transformação digital</p>
+      <h3>Mais de 15 anos de experiência no mercado</h3>
+      <a href="#contato" class="contact-btn">Entre em Contato</a>
+    </div>
+    <div class="section-image">
+      <img src="/statics/img/home-pc.jpg" alt="Imagem de Apresentação">
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <div class="container-full servicos-bkg">
+    <!-- Seção de Serviços -->
+    <section id="servicos">
+      <h2>Serviços</h2>
+      <div class="services">
+        <div class="service-item">
+          <img src="/statics/icons/bank.png" alt="Ícone do Serviço">
+          <div>
+            <h3>Consultoria em Segurança Digital</h3>
+            <p>Proteja seus dados com as melhores práticas.</p>
+          </div>
+        </div>
+        <div class="service-item">
+            <img src="/statics/icons/local-area-network.png" alt="Ícone do Serviço">
+            <div>
+          <h3>Redes</h3>
+          <p>Soluções de conectividade eficientes.</p>
+          </div>
+        </div>
+        <div class="service-item">
+            <img src="/statics/icons/motherboard.png" alt="Ícone do Serviço">
+          <div>
+          <h3>Hardware</h3>
+          <p>Equipamentos de alta performance para sua empresa.</p>
+          </div>
+        </div>
+        <div class="service-item">
+            <img src="/statics/icons/connection-network.png" alt="Ícone do Serviço">
+          <div>
+          <h3>Cloud Computing</h3>
+          <p>Escalabilidade e flexibilidade para seus projetos.</p>
+          </div>          
+        </div>
+        <div class="service-item">
+            <img src="/statics/icons/activity-feed.png" alt="Ícone do Serviço">
+          <div>
+          <h3>Desenvolvimento Web</h3>
+          <p>Sites modernos e responsivos para seu negócio.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container-full contato-bkg">
+    <!-- Seção de Contato -->
+    <section id="contato">
+      <h2>Contato</h2>
+      <form id="contactForm" action="mailto:contato@tecstorm.com.br" method="POST" enctype="text/plain">
+        <input type="text" id="nome" name="nome" placeholder="Nome" required>
+        <input type="email" id="email" name="email" placeholder="E-mail" required>
+        <input type="tel" id="telefone" name="telefone" placeholder="Telefone" required>
+        <select id="servico" name="servico" required>
+          <option value="">Selecione o Tipo de Serviço</option>
+          <option value="consultoria">Consultoria em Segurança Digital</option>
+          <option value="redes">Redes</option>
+          <option value="hardware">Hardware</option>
+          <option value="cloud">Cloud Computing</option>
+          <option value="web">Desenvolvimento Web</option>
+        </select>
+        <!-- Google reCAPTCHA -->
+        <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </div>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col footer-logo">
+        <img src="https://via.placeholder.com/100" alt="Logo">
+        <p>Impulsionando sua transformação digital</p>
+      </div>
+      <div class="footer-col footer-links">
+        <h3>Links Úteis</h3>
+        <ul>
+          <li><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+          <li><a href="#">Link 3</a></li>
+          <li><a href="#">Link 4</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h3>Contato</h3>
+        <p>Email: contato@tecstorm.com.br</p>
+        <p>Telefone: (11) 95384-9285</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão de Scroll para o Topo -->
+  <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-chevron-up"></i></button>
+
+  <!-- Scripts JavaScript -->
+  <script>
+    // Função para alternar o dark mode
+    function toggleDarkMode(button) {
+      document.body.classList.toggle('dark');
+      const icon = button.querySelector('i');
+      icon.classList.toggle('fa-moon');
+      icon.classList.toggle('fa-sun');
+    }
+
+    // Listener para o dark mode (desktop)
+    const darkModeToggleDesktop = document.getElementById('darkModeToggleDesktop');
+    if(darkModeToggleDesktop){
+      darkModeToggleDesktop.addEventListener('click', () => {
+        toggleDarkMode(darkModeToggleDesktop);
+      });
+    }
+
+    // Listener para o dark mode (mobile)
+    const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
+    if(darkModeToggleMobile){
+      darkModeToggleMobile.addEventListener('click', () => {
+        toggleDarkMode(darkModeToggleMobile);
+      });
+    }
+
+    // Botão de Scroll para o Topo
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.style.display = (window.pageYOffset > 300) ? 'block' : 'none';
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Validação simples do formulário
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', function(e) {
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const telefone = document.getElementById('telefone').value.trim();
+      const servico = document.getElementById('servico').value;
+      
+      if (!nome || !email || !telefone || !servico) {
+        e.preventDefault();
+        alert('Por favor, preencha todos os campos.');
+      }
+      // Obs.: Para uma validação mais robusta, pode-se implementar funções adicionais e integração com o reCAPTCHA.
+    });
+
+    // Toggle do Menu Mobile
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
